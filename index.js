@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
-
+const contentRoutes = require('./routes/contentRoutes'); // <-- Add this
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -11,9 +11,9 @@ app.use(cors());
 app.use(express.json()); 
 
 // Routes
-// This prefixes all routes in authRoutes with /api/auth
-// So login becomes: http://localhost:3000/api/auth/login
 app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/contents', contentRoutes);
 
 // Root Check
 app.get('/', (req, res) => {
