@@ -4,57 +4,71 @@ const jwt = require('jsonwebtoken');
 
 const prisma = new PrismaClient();
 
-// 1. REGISTER
 exports.register = async (req, res) => {
-  const { email, password, name } = req.body;
+  const { team_name, password, is_binusian } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({ error: 'Email and password are required' });
+  if (!team_name || !password) {
+    return res.status(400).json({ error: 'Team name and password are required' });
   }
 
   try {
-    const existingUser = await prisma.user.findUnique({ where: { email } });
-    if (existingUser) {
-      return res.status(400).json({ error: 'User already exists' });
+    const existingTeam = await prisma.teams.findUnique({ 
+        where: { team_name: team_name } 
+    });
+    
+    if (existingTeam) {
+      return res.status(400).json({ error: 'Team name already taken' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await prisma.user.create({
+    const newTeam = await prisma.teams.create({
       data: {
-        email,
-        name,
+        team_name,
         password: hashedPassword,
+        is_binusian: is_binusian || false,
       },
     });
 
-    res.status(201).json({ message: 'User registered successfully', userId: newUser.id });
+    res.status(201).json({ message: 'Team registered!', teamId: newTeam.id });
   } catch (error) {
     console.error('Register Error:', error);
     res.status(500).json({ error: 'Registration failed' });
   }
 };
 
-// 2. LOGIN
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  const { team_name, password } = req.body;
 
   try {
-    const user = await prisma.user.findUnique({ where: { email } });
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+    const team = await prisma.teams.findUnique({ 
+        where: { team_name: team_name } 
+    });
+
+    if (!team) {
+      return res.status(404).json({ error: 'Team not found' });
     }
 
-    const validPassword = await bcrypt.compare(password, user.password);
+    const validPassword = await bcrypt.compare(password, team.password);
     if (!validPassword) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     const token = jwt.sign(
-      { userId: user.id, email: user.email }, 
+      { teamId: team.id, teamName: team.team_name }, 
       process.env.JWT_SECRET, 
-      { expiresIn: '1h' }
+      { expiresIn: '2h' }
     );
+
+    await prisma.activities.create({
+        data: {
+            team_id: team.id,
+            activity_type: 'login',
+            description: 'Team logged in successfully',
+            ip_address: req.ip || '0.0.0.0',
+            user_agent: req.headers['user-agent'] || 'unknown'
+        }
+    });
 
     res.json({ message: 'Login successful', token });
   } catch (error) {
@@ -63,17 +77,21 @@ exports.login = async (req, res) => {
   }
 };
 
-// 3. GET PROFILE (Protected)
 exports.getProfile = async (req, res) => {
   try {
-    // req.user.userId comes from the authMiddleware
-    const user = await prisma.user.findUnique({ 
-      where: { id: req.user.userId },
-      select: { id: true, email: true, name: true, createdAt: true } // Don't return the password!
+    const team = await prisma.teams.findUnique({ 
+      where: { id: req.user.teamId },
+      include: { team_leaders: true } 
     });
     
-    res.json(user);
+    if (!team) {
+        return res.status(404).json({ error: 'Team not found' });
+    }
+
+    const { password, ...teamData } = team;
+    res.json(teamData);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to fetch profile' });
   }
 };
