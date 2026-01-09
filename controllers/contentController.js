@@ -1,32 +1,33 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-// 1. Create new content
-exports.createContent = async (req, res) => {
-  const { title, body } = req.body;
-
-  try {
-    const newContent = await prisma.content.create({
-      data: {
-        title,
-        body,
-        userId: req.user.userId, 
-      },
-    });
-    res.status(201).json(newContent);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to create content' });
-  }
-};
-
-// 2. Get all content
 exports.getAllContent = async (req, res) => {
   try {
-    const contents = await prisma.content.findMany({
-      include: { user: { select: { name: true } } } 
+    const contents = await prisma.contents.findMany({
+        where: { is_active: true } 
     });
     res.json(contents);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch content' });
+  }
+};
+
+exports.createContent = async (req, res) => {
+  const { title, description, content_type } = req.body;
+
+
+  try {
+    const newContent = await prisma.contents.create({
+      data: {
+        title,
+        description,
+        content_type: content_type || 'announcement', 
+        is_active: true
+      },
+    });
+    res.status(201).json(newContent);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to create content' });
   }
 };
