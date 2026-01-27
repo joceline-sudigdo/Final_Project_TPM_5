@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const prisma = new PrismaClient();
 
-// --- ADMIN LOGIN ---
 exports.adminLogin = async (req, res) => {
   const { username, password } = req.body;
 
@@ -17,7 +16,6 @@ exports.adminLogin = async (req, res) => {
     if (!validPassword)
       return res.status(401).json({ error: "Invalid password" });
 
-    // Mark the token role as 'admin'
     const token = jwt.sign(
       { id: admin.id, role: "admin" },
       process.env.JWT_SECRET,
@@ -30,19 +28,15 @@ exports.adminLogin = async (req, res) => {
   }
 };
 
-// --- CRUD PESERTA (TEAMS) ---
-
-// 1. READ: Get All Teams (with their leaders)
 exports.getAllTeams = async (req, res) => {
   try {
     const teams = await prisma.teams.findMany({
       include: {
-        team_leaders: true, // See who is in the team
-        activities: { take: 1, orderBy: { created_at: "desc" } }, // See last login
+        team_leaders: true,
+        activities: { take: 1, orderBy: { created_at: "desc" } },
       },
     });
 
-    // Remove passwords from view
     const safeTeams = teams.map((team) => {
       const { password, ...rest } = team;
       return rest;
@@ -54,9 +48,8 @@ exports.getAllTeams = async (req, res) => {
   }
 };
 
-// 2. UPDATE: Edit a Team (e.g., Verify them or Change Name)
 exports.updateTeam = async (req, res) => {
-  const { id } = req.params; // Get ID from URL
+  const { id } = req.params;
   const { team_name, is_binusian } = req.body;
 
   try {
@@ -70,13 +63,10 @@ exports.updateTeam = async (req, res) => {
   }
 };
 
-// 3. DELETE: Remove a Team (Kick them out)
 exports.deleteTeam = async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Because of 'onDelete: Cascade' in your schema,
-    // this also deletes their Leaders and Activities automatically!
     await prisma.teams.delete({
       where: { id: parseInt(id) },
     });
