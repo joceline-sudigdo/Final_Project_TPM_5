@@ -30,6 +30,24 @@ exports.register = async (req, res) => {
       },
     });
 
+    await prisma.users.create({
+      data: {
+        team_id: newTeam.id,
+        team_name: newTeam.team_name,
+        password: hashedPassword
+      }
+    });
+
+    await prisma.activities.create({
+      data: {
+        team_id: newTeam.id,
+        activity_type: 'register',
+        description: 'Team registered successfully',
+        ip_address: req.ip || '0.0.0.0',
+        user_agent: req.headers['user-agent'] || 'unknown'
+      }
+    });
+
     res.status(201).json({ message: 'Team registered!', teamId: newTeam.id });
   } catch (error) {
     console.error('Register Error:', error);
@@ -59,6 +77,18 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET, 
       { expiresIn: '2h' }
     );
+
+    await prisma.users.upsert({
+      where: { team_id: team.id },
+      update: {
+        last_login: new Date()
+      },
+      create: {
+        team_id: team.id,
+        team_name: team.team_name,
+        password: team.password
+      }
+    });
 
     await prisma.activities.create({
         data: {

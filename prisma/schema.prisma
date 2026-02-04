@@ -34,6 +34,7 @@ model contents {
 model team_leaders {
   id                 Int      @id @default(autoincrement())
   team_id            Int
+  role               team_leaders_role
   full_name          String   @db.VarChar(255)
   email              String   @db.VarChar(255)
   whatsapp_number    String   @db.VarChar(20)
@@ -76,6 +77,13 @@ enum activities_activity_type {
   submit
   update
   view
+}
+
+enum team_leaders_role {
+  leader
+  member1
+  member2
+  member3
 }
 
 enum contents_content_type {
