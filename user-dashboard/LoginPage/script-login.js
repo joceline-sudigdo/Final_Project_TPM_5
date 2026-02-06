@@ -15,13 +15,14 @@ const teamInput = document.getElementById("teamName");
 const passInput = document.getElementById("password");
 const generalError = document.getElementById("generalError");
 
-form.addEventListener("submit", function (e) {
+form.addEventListener("submit", async function (e) {
   e.preventDefault();
   let isValid = true;
 
   teamGroup.classList.remove("has-error");
   passGroup.classList.remove("has-error");
   generalError.style.display = "none";
+  generalError.innerText = "Invalid credentials. Please try again."; // Default error
 
   if (teamInput.value.trim() === "") {
     teamGroup.classList.add("has-error");
@@ -33,9 +34,35 @@ form.addEventListener("submit", function (e) {
     isValid = false;
   }
 
-  if (!isValid) {
-    generalError.style.display = "block";
-  } else {
-    alert("Login Successful! Redirecting...");
+  if (isValid) {
+    try {
+      const response = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          team_name: teamInput.value.trim(),
+          password: passInput.value
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Login successful
+        localStorage.setItem('token', data.token); // Store token
+        alert("Login Successful! Redirecting...");
+        window.location.href = "../User Dashboard/index.html"; // Adjust path as needed
+      } else {
+        // Login failed
+        generalError.innerText = data.error || "Login failed";
+        generalError.style.display = "block";
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+      generalError.innerText = "Network error. Please ensure the backend server is running on port 3000.";
+      generalError.style.display = "block";
+    }
   }
 });
