@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Dashboard - Technoscape</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="sparkle s1"></div>
+    <div class="sparkle s2"></div>
+    <div class="sparkle s3"></div>
+    <div class="sparkle s4"></div>
+
+    <nav class="navbar">
+      <div class="nav-logo">Hackathon</div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Champion Prizes</a></li>
+        <li><a href="#">Mentor Jury</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#" class="active">Timeline</a></li>
+      </ul>
+      <button class="btn-logout" onclick="openLogoutModal()">Logout</button>
+    </nav>
+
+    <div class="main-container">
+      <header class="dashboard-header">
+        <h1 class="glow-title">Team Dashboard</h1>
+        <p class="welcome-text">Welcome back, <span>AmanAja!</span></p>
+      </header>
+
+      <div class="cards-wrapper">
+        <div class="design-card deep-blue-card">
+          <div class="card-glow-header"></div>
+          <h2 class="card-title">Leader Profile</h2>
+          <div class="card-content">
+            Full Name :</strong> Reynard Sebastian</p>
+            Email :</strong> reynard@gmail.com</p>
+            Whatsapp Number :</strong> +62 1234567890</p>
+            LINE ID :</strong> Rey456123</p>
+            Github ID :</strong> Reynard12345</p>
+            Birth Place :</strong> Jakarta</p>
+            Birth Date :</strong> 20 May 2003</p>
+          </div>
+          <div class="card-buttons">
+            <button class="btn-gradient">View CV</button>
+            <button class="btn-gradient">View ID Card / Flazz Card</button>
+          </div>
+        </div>
+
+        <div class="design-card deep-blue-card">
+          <div class="card-glow-header"></div>
+          <h2 class="card-title">Team Members</h2>
+          <div class="card-content" id="teamMembersList">
+            <p id="member1">
+              <strong>Member 1 :</strong>
+              <strong class="username-text">[Username]</strong></span>
+            </p>
+            <p id="member2">
+              <strong>Member 2 :</strong>
+              <strong class="username-text">[Username]</strong></span>
+            </p>
+            <p id="member3">
+              <strong>Member 3 :</strong>
+              <strong class="username-text">[Username]</strong></span>
+            </p>
+          </div>
+          <div class="card-buttons">
+            <button
+              class="btn-solid-blue"
+              id="btnAddMember"
+              onclick="openAddMemberModal()"
+            >
+              + Add Member
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-section">
+        <h2 class="timeline-title">Timeline</h2>
+        <div class="timeline-map-container">
+          <svg
+            class="snake-svg"
+            viewBox="0 0 900 1200"
+            preserveAspectRatio="none"
+          >
+
+            <path
+              d="M 0 850 C 80 760, 140 720, 200 700"
+              fill="none"
+              stroke="#79c05a"
+              stroke-width="18"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="filter: drop-shadow(0 0 8px rgba(121,192,90,0.6))"
+            />
+
+            <path
+              d="M 200 700
+                             C 240 660, 420 600, 520 580
+                             C 620 560, 700 560, 740 520
+                             C 780 480, 680 420, 560 460
+                             C 440 500, 320 540, 220 360
+                             C 140 220, 520 180, 740 120"
+              fill="none"
+              stroke="white"
+              stroke-width="18"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="filter: drop-shadow(0 0 10px rgba(255,255,255,0.25))"
+            />
+          </svg>
+
+          <div class="t-item pos-1">
+            <div class="dot c-green"></div>
+            <div class="t-content">
+              <h4>Open Registration</h4>
+              <p>January 15, 2025</p>
+            </div>
+          </div>
+
+          <div class="t-item pos-2 right-align">
+            <div class="t-content">
+              <h4>Close Registration</h4>
+              <p>February 16, 2025</p>
+              <span class="t-note">(11:59 PM WIB)</span>
+            </div>
+            <div class="dot c-yellow"></div>
+          </div>
+
+          <div class="t-item pos-3">
+            <div class="dot c-red"></div>
+            <div class="t-content">
+              <h4>Competition Day</h4>
+              <p>Feb 28 - March 1, 2025</p>
+              <p>Venue: BINUS Alam Sutera</p>
+              <span class="t-note">Link Activity: TBA</span>
+            </div>
+          </div>
+
+          <div class="t-item pos-4 right-align">
+            <div class="t-content">
+              <h4>Awarding Ceremony</h4>
+              <p>March 3, 2025</p>
+              <p>(1:00 PM WIB)</p>
+            </div>
+            <div class="dot c-blue"></div>
+          </div>
+
+          <div class="t-item pos-5 right-align">
+            <div class="t-content">
+              <h4>Technical Meeting</h4>
+              <p>February 20, 2025</p>
+              <p>(7:00 PM WIB)</p>
+              <span class="t-note">Link Meeting: TBA</span>
+            </div>
+            <div class="dot c-orange"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lower-section">
+        <div class="contact-unified-box deep-blue-card">
+          <div class="cp-header">
+            <h2>Contact Person</h2>
+            <p>Need help? Reach out to our support team.</p>
+          </div>
+          <div class="participant-support">
+            <h4>Participant Support</h4>
+            <div class="contact-rows">
+              <div class="c-row">
+                <div class="icon-bg wa-bg"><i class="fab fa-whatsapp"></i></div>
+                <span>+62 812-3456-7890</span>
+              </div>
+              <div class="c-row">
+                <div class="icon-bg email-bg">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <span>technoscape@bncc.net</span>
+              </div>
+            </div>
+            <p class="avail-note">*Available: 09:00 AM - 05:00 PM WIB</p>
+          </div>
+        </div>
+        <div class="organizer-wrapper">
+          <div class="pill-badge">Powered and Organized by</div>
+          <div class="bncc-logo">BNCC</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer-bar">
+      <div class="footer-content">
+        <div class="footer-left">
+          &copy; 2025 Technoscape Hackathon. All Rights Reserved.
+        </div>
+        <div class="footer-right">
+          <a href="#">Privacy Policy</a> <span class="sep">|</span>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+    <div id="logoutModal" class="modal-overlay">
+      <div class="modal-box small-box deep-blue-card">
+        <h3>Are you sure you want to log out?</h3>
+        <div class="modal-actions">
+          <button class="btn-modal btn-no" onclick="closeLogoutModal()">
+            No
+          </button>
+          <button class="btn-modal btn-yes" onclick="confirmLogout()">
+            Yes
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="addMemberModal" class="modal-overlay">
+      <div class="modal-scroll-wrapper">
+        <div class="add-member-card deep-blue-card">
+          <h2 class="am-title">Add Member</h2>
+          <div class="am-form-container">
+            <h3 class="am-subtitle" id="modalMemberTitle">Member 1</h3>
+            <form
+              id="addMemberForm"
+              novalidate
+              onsubmit="handleFormSubmit(event)"
+            >
+              <div class="form-group">
+                <label>Full Name</label
+                ><input
+                  type="text"
+                  id="inputName"
+                  placeholder="Enter full name"
+                /><small class="error-text" id="errName"
+                  >Full name cannot be empty</small
+                >
+              </div>
+              <div class="form-group">
+                <label>Email</label
+                ><input
+                  type="email"
+                  id="inputEmail"
+                  placeholder="Enter email"
+                /><small class="error-text" id="errEmail"
+                  >Please enter a valid email</small
+                >
+              </div>
+              <div class="form-group">
+                <label>Whatsapp Number</label
+                ><input
+                  type="text"
+                  id="inputWA"
+                  placeholder="Enter Whatsapp Number"
+                /><small class="error-text" id="errWA"
+                  >Whatsapp number must be at least 9 digits</small
+                >
+              </div>
+              <div class="form-group">
+                <label>LINE ID</label
+                ><input
+                  type="text"
+                  id="inputLine"
+                  placeholder="Enter LINE ID"
+                /><small class="error-text" id="errLine"
+                  >This field cannot be empty</small
+                >
+              </div>
+              <div class="form-group">
+                <label>Github ID</label
+                ><input
+                  type="text"
+                  id="inputGithub"
+                  placeholder="Enter Github ID"
+                /><small class="error-text" id="errGithub"
+                  >This field cannot be empty</small
+                >
+              </div>
+              <div class="form-group">
+                <label>Birth Place</label
+                ><input
+                  type="text"
+                  id="inputBirthPlace"
+                  placeholder="Enter Birth Place"
+                /><small class="error-text" id="errBirthPlace"
+                  >This field cannot be empty</small
+                >
+              </div>
+              <div class="form-group">
+                <label>Birth Date</label
+                ><input type="date" id="inputBirthDate" /><small
+                  class="error-text"
+                  id="errBirthDate"
+                  >Participant must be at least 17 years old</small
+                >
+              </div>
+              <div class="form-group">
+                <label>Upload CV</label>
+                <div class="upload-row">
+                  <input
+                    type="text"
+                    class="upload-text"
+                    id="inputCV"
+                    placeholder="Upload your CV"
+                    readonly
+                  /><button
+                    type="button"
+                    class="btn-upload"
+                    onclick="simulateUpload('inputCV')"
+                  >
+                    Upload
+                  </button>
+                </div>
+                <small class="error-text" id="errCV">Please upload file</small>
+              </div>
+              <div class="form-group">
+                <label>Upload ID Card</label>
+                <div class="upload-row">
+                  <input
+                    type="text"
+                    class="upload-text"
+                    id="inputIDCard"
+                    placeholder="Upload your Binusian Card"
+                    readonly
+                  /><button
+                    type="button"
+                    class="btn-upload"
+                    onclick="simulateUpload('inputIDCard')"
+                  >
+                    Upload
+                  </button>
+                </div>
+                <small class="error-text" id="errIDCard"
+                  >Please upload file</small
+                >
+              </div>
+
+              <div class="am-actions">
+                <button
+                  type="button"
+                  class="btn-back"
+                  onclick="closeAddMemberModal()"
+                >
+                  Back
+                </button>
+                <button type="submit" class="btn-add">+ Add Member</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
