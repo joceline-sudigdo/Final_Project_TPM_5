@@ -1,4 +1,3 @@
-/* --- RESET & VARIABLES --- */
 * {
   margin: 0;
   padding: 0;
@@ -6,17 +5,15 @@
 }
 
 :root {
-  /* --- COLOR PALETTE SESUAI REQUEST --- */
-  --sky-indigo: #7b8ec8; /* Headers */
-  --powder-blue: #b8c9e8; /* Text Body */
-  --aqua-fresh: #7dd3d7; /* Accents/Highlights */
-  --soft-lilac: #b8a8ce; /* Subtle Accents */
-  --cool-gray: #3d4a5c; /* Dark Text inside inputs */
-  --soft-mist: #e8edf2; /* Borders (Putih Terang) */
-  --warm-cream: #f5f3ee; /* Input Backgrounds */
-  --error-red: #ff4d4d; /* Error State */
+  --sky-indigo: #7b8ec8; 
+  --powder-blue: #b8c9e8;
+  --aqua-fresh: #7dd3d7; 
+  --soft-lilac: #b8a8ce;
+  --cool-gray: #3d4a5c;
+  --soft-mist: #e8edf2; 
+  --warm-cream: #f5f3ee; 
+  --error-red: #ff4d4d; 
 
-  /* Background Gradient (Dark Sci-Fi Theme) */
   --bg-gradient: linear-gradient(180deg, #050810 0%, #0e1a35 60%, #1e3a8a 100%);
   --card-bg: rgba(5, 8, 16, 0.9); /* Lebih gelap agar kontras */
 }
@@ -32,7 +29,6 @@ body {
   overflow: hidden; /* Lock scroll */
 }
 
-/* --- NAVIGATION --- */
 header {
   width: 100%;
   padding: 20px 40px;
@@ -57,7 +53,6 @@ nav {
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-/* MENU NAVIGASI (Perbaikan Border Putih) */
 .nav-menu {
   border: 1.5px solid var(--soft-mist); /* Border Putih Tegas */
   border-radius: 50px;
@@ -89,9 +84,8 @@ nav {
   font-size: 0.8rem;
 }
 
-/* TOMBOL LOGIN ATAS (Border Putih) */
 .btn-nav-login {
-  border: 1.5px solid var(--soft-mist); /* Border Putih */
+  border: 1.5px solid var(--soft-mist); 
   background: rgba(30, 58, 138, 0.3);
   color: #ffffff;
   padding: 8px 30px;
@@ -109,7 +103,6 @@ nav {
   box-shadow: 0 0 20px rgba(123, 142, 200, 0.6);
 }
 
-/* --- MAIN CONTENT --- */
 main {
   flex-grow: 1;
   display: flex;
@@ -118,19 +111,17 @@ main {
   padding-bottom: 30px;
 }
 
-/* --- LOGIN CARD --- */
 .login-card {
   background: var(--card-bg);
   width: 100%;
   max-width: 650px;
   padding: 40px 60px;
   border-radius: 12px;
-  border: 1px solid white; /* Border Card Putih sesuai gambar */
+  border: 1px solid white; 
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
   text-align: center;
 }
 
-/* Header Text */
 .login-card h1 {
   font-family: "Orbitron", sans-serif;
   color: #ffffff; /* Judul Utama Putih */
@@ -144,19 +135,18 @@ main {
 }
 
 .sparkle {
-  color: var(--soft-mist); /* Sparkle putih/silver */
+  color: var(--soft-mist); 
   font-size: 1.8rem;
-  text-shadow: 0 0 15px var(--sky-indigo); /* Glow Indigo */
+  text-shadow: 0 0 15px var(--sky-indigo); 
 }
 
 .subtext {
-  color: var(--powder-blue); /* Menggunakan warna Powder Blue */
+  color: var(--powder-blue); 
   margin-bottom: 35px;
   font-size: 1rem;
   letter-spacing: 0.5px;
 }
 
-/* --- FORM ELEMENTS --- */
 .form-group {
   margin-bottom: 20px;
   text-align: left;
@@ -164,13 +154,13 @@ main {
 
 label {
   display: block;
-  color: white; /* Label tetap putih agar kontras */
+  color: white; 
   font-weight: 600;
   margin-bottom: 8px;
   font-size: 0.95rem;
   letter-spacing: 0.5px;
   font-family:
-    "Orbitron", sans-serif; /* Font futuristik untuk label sesuai request font */
+    "Orbitron", sans-serif; 
 }
 
 .input-wrapper {
@@ -180,11 +170,11 @@ label {
 input {
   width: 100%;
   padding: 14px 18px;
-  background-color: var(--warm-cream); /* Background input Cream/Abu muda */
+  background-color: var(--warm-cream);
   border: none;
   border-radius: 6px;
   font-size: 1rem;
-  color: var(--cool-gray); /* Text input abu tua */
+  color: var(--cool-gray); 
   outline: none;
   font-family: "Poppins", sans-serif;
   transition: box-shadow 0.3s;
@@ -195,7 +185,7 @@ input::placeholder {
 }
 
 input:focus {
-  box-shadow: 0 0 0 2px var(--sky-indigo); /* Focus color Indigo */
+  box-shadow: 0 0 0 2px var(--sky-indigo);
 }
 
 .toggle-password {
@@ -212,12 +202,10 @@ input:focus {
   justify-content: center;
 }
 
-/* --- BUTTON SUBMIT --- */
 .btn-submit {
   width: 100%;
   margin-top: 25px;
   padding: 14px 0;
-  /* Gradient Biru Gelap ke Terang */
   background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%);
   border: 1px solid rgba(255, 255, 255, 0.6);
   color: white;
@@ -254,14 +242,13 @@ input:focus {
   color: var(--aqua-fresh);
 }
 
-/* --- VALIDATION STYLES (Warna Merah) --- */
 .error-text {
   display: none;
   color: var(--error-red);
   font-size: 0.85rem;
   margin-top: 5px;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8); /* Shadow agar terbaca di bg gelap */
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .general-error {
@@ -282,7 +269,6 @@ input:focus {
   display: block;
 }
 
-/* Responsive Laptop Kecil */
 @media (max-height: 720px) {
   .login-card {
     padding: 30px 50px;
