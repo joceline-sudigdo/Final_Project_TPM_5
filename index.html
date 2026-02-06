@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hackathon Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">Hackathon</div>
+        <div class="nav-menu">
+          <a href="#">Home</a>
+          <span class="divider">|</span>
+          <a href="#">Champion Prizes</a>
+          <span class="divider">|</span>
+          <a href="#">Mentor & Jury</a>
+          <span class="divider">|</span>
+          <a href="#">About</a>
+          <span class="divider">|</span>
+          <a href="#">FAQ</a>
+          <span class="divider">|</span>
+          <a href="#">Timeline</a>
+        </div>
+        <a href="#" class="btn-nav-login">Login</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="login-card">
+        <h1><span class="sparkle">✦</span> Welcome Back!</h1>
+        <p class="subtext">Log in to access your team dashboard</p>
+
+        <form id="loginForm" novalidate>
+          <div class="form-group" id="teamGroup">
+            <label for="teamName">Team Name</label>
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="teamName"
+                placeholder="Enter your team name"
+              />
+            </div>
+            <small class="error-text">Team name cannot be empty</small>
+          </div>
+
+          <div class="form-group" id="passGroup">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+              />
+              <div class="toggle-password" id="togglePass">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <small class="error-text">Password is Incorrect</small>
+          </div>
+
+          <button type="submit" class="btn-submit">Log In</button>
+
+          <div class="general-error" id="generalError">
+            *Please fill in all fields before submitting
+          </div>
+
+          <p class="signup-text">
+            Don't have an account? <a href="#">Sign Up</a>
+          </p>
+        </form>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
