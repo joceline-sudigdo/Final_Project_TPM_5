@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav-level1">
+        <div class="nav-left">
+            <div class="logo-text">Hackathon</div>
+        </div>
+        <div class="nav-center">
+            <div class="tab-container">
+                <button class="tab-btn active" onclick="switchTab('participants')">Participants</button>
+                <div class="tab-divider">|</div>
+                <button class="tab-btn" onclick="switchTab('teams')">Teams</button>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="user-profile">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="7" r="4" stroke="white" stroke-width="2"/>
+                    <path d="M20 21C20 17.134 16.4183 14 12 14C7.58172 14 4 17.134 4 21" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div class="user-info">
+                    <span>Hi, Admin</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M6 9L12 15L18 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="nav-level2" id="bannerSection" style="display:none">
+        <div class="banner">
+            <div class="banner-content">
+                <h1>Admin Panel</h1>
+                <h2>Hackathon 9.0</h2>
+                <p>Code the Future: AI x Innovation 2026</p>
+                <button class="back-btn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M10 12L6 8L10 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Back to main site
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="nav-level3" id="statsSection" style="display:none">
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-value" id="totalTeams">0</div>
+                <div class="stat-label">Total Teams</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="incompleteInfo">0</div>
+                <div class="stat-label">Incomplete Informations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="totalParticipants">0</div>
+                <div class="stat-label">Total Participants</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="latestRegistration">-</div>
+                <div class="stat-label">Latest Registration</div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-level4">
+        <div class="tools-container">
+            <div class="search-box">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <circle cx="7" cy="7" r="5" stroke="#0F153D" stroke-width="1.5"/>
+                    <path d="M11 11L14 14" stroke="#0F153D" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <input type="text" id="searchInput" placeholder="Search by participants name..." oninput="searchData()">
+            </div>
+            <div class="sort-buttons" id="sortButtons"></div>
+        </div>
+    </div>
+    <div class="nav-level5">
+        <div class="table-container">
+            <table class="data-table">
+                <thead id="tableHead"></thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="popup-overlay" id="teamDetailsPopup">
+        <div class="popup-container details-popup">
+            <div class="popup-header">
+                <h2>Team Details</h2>
+                <button class="close-popup" onclick="closeTeamPopup()">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 17 L8.125 11.875 M8.125 11.875 L3.875 11.875 M8.125 11.875 L7.5 15.5 M17 3 L11.875 8.125 M11.875 8.125 L16.125 8.125 M11.875 8.125 L11.875 4.5" stroke="#0F153D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/> 
+                    </svg>
+                </button>
+            </div>
+            <div class="popup-content">
+                <h3>Team Informations</h3>
+                <div class="info-box">
+                    <div class="info-row">
+                        <span class="info-label">Team Name:</span>
+                        <span class="info-value" id="teamDetailName">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Registration Date:</span>
+                        <span class="info-value" id="teamRegDate">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Password:</span>
+                        <span class="info-value" id="teamPassword">-</span>
+                    </div>
+                </div>
+                <h3>Leader Informations<svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M7 4 L13 10 L7 16" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></h3>
+                <div class="info-box">
+                    <div class="info-row">
+                        <span class="info-label">Name:</span>
+                        <span class="info-value" id="teamLeaderName">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Email:</span>
+                        <span class="info-value" id="teamLeaderEmail">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Phone Number:</span>
+                        <span class="info-value" id="teamLeaderPhone">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Status:</span>
+                        <span class="info-value" id="teamLeaderStatus">-</span>
+                    </div>
+                </div>
+                <div id="teamMembersContainer"></div>
+                <div class="document-section">
+                    <div class="document-card cv-card">
+                        <div class="doc-title">Download <span class="cv-name" id="teamCVName">-</span> CV</div>
+                        <button class="doc-btn cv-btn" onclick="downloadTeamCV()">Download</button>
+                    </div>
+                    <div class="document-card id-card">
+                        <div class="doc-title">Download <span class="id-name" id="teamIDName">-</span> <span class="id-type" id="teamIDType">-</span></div>
+                        <button class="doc-btn id-btn" onclick="downloadTeamID()">Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup-overlay" id="teamEditPopup">
+        <div class="popup-container edit-popup">
+            <div class="popup-header">
+                <h2>Edit Team</h2>
+                <button class="close-popup" onclick="closeTeamPopup()">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 17 L8.125 11.875 M8.125 11.875 L3.875 11.875 M8.125 11.875 L7.5 15.5 M17 3 L11.875 8.125 M11.875 8.125 L16.125 8.125 M11.875 8.125 L11.875 4.5" stroke="#0F153D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/> 
+                    </svg>
+                </button>
+            </div>
+            <div class="popup-content">
+                <div class="input-group">
+                    <label>Team Name</label>
+                    <div class="input-with-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M10 1.5C10.1751 1.32491 10.383 1.186 10.6118 1.09124C10.8405 0.99649 11.0858 0.947754 11.3333 0.947754C11.5809 0.947754 11.8261 0.99649 12.0549 1.09124C12.2837 1.186 12.4916 1.32491 12.6667 1.5C12.8418 1.6751 12.9807 1.88302 13.0755 2.11178C13.1702 2.34054 13.219 2.58578 13.219 2.83334C13.219 3.0809 13.1702 3.32614 13.0755 3.5549C12.9807 3.78367 12.8418 3.99158 12.6667 4.16668L4 12.8333L0.5 14L1.66667 10.5L10 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="text" id="editTeamName" placeholder="Enter team name" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Leader Name</label>
+                    <div class="input-with-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M10 1.5C10.1751 1.32491 10.383 1.186 10.6118 1.09124C10.8405 0.99649 11.0858 0.947754 11.3333 0.947754C11.5809 0.947754 11.8261 0.99649 12.0549 1.09124C12.2837 1.186 12.4916 1.32491 12.6667 1.5C12.8418 1.6751 12.9807 1.88302 13.0755 2.11178C13.1702 2.34054 13.219 2.58578 13.219 2.83334C13.219 3.0809 13.1702 3.32614 13.0755 3.5549C12.9807 3.78367 12.8418 3.99158 12.6667 4.16668L4 12.8333L0.5 14L1.66667 10.5L10 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="text" id="editTeamLeader" placeholder="Enter leader name" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <div class="input-with-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M10 1.5C10.1751 1.32491 10.383 1.186 10.6118 1.09124C10.8405 0.99649 11.0858 0.947754 11.3333 0.947754C11.5809 0.947754 11.8261 0.99649 12.0549 1.09124C12.2837 1.186 12.4916 1.32491 12.6667 1.5C12.8418 1.6751 12.9807 1.88302 13.0755 2.11178C13.1702 2.34054 13.219 2.58578 13.219 2.83334C13.219 3.0809 13.1702 3.32614 13.0755 3.5549C12.9807 3.78367 12.8418 3.99158 12.6667 4.16668L4 12.8333L0.5 14L1.66667 10.5L10 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="email" id="editTeamEmail" placeholder="Enter email" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <div class="input-with-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M10 1.5C10.1751 1.32491 10.383 1.186 10.6118 1.09124C10.8405 0.99649 11.0858 0.947754 11.3333 0.947754C11.5809 0.947754 11.8261 0.99649 12.0549 1.09124C12.2837 1.186 12.4916 1.32491 12.6667 1.5C12.8418 1.6751 12.9807 1.88302 13.0755 2.11178C13.1702 2.34054 13.219 2.58578 13.219 2.83334C13.219 3.0809 13.1702 3.32614 13.0755 3.5549C12.9807 3.78367 12.8418 3.99158 12.6667 4.16668L4 12.8333L0.5 14L1.66667 10.5L10 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="tel" id="editTeamPhone" placeholder="Enter phone number" required>
+                    </div>
+                </div>
+                <div class="popup-buttons">
+                    <button class="popup-btn save-btn" onclick="saveTeamEdit()">Save changes</button>
+                    <button class="popup-btn cancel-btn" onclick="closeTeamPopup()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup-overlay" id="teamDeletePopup">
+        <div class="popup-container delete-popup">
+            <div class="popup-header">
+                <h2>Delete Team</h2>
+                <button class="close-popup" onclick="closeTeamPopup()">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 17 L8.125 11.875 M8.125 11.875 L3.875 11.875 M8.125 11.875 L7.5 15.5 M17 3 L11.875 8.125 M11.875 8.125 L16.125 8.125 M11.875 8.125 L11.875 4.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/> 
+                    </svg>
+                </button>
+            </div>
+            <div class="popup-content">
+                <div class="delete-confirm-box">
+                    <p class="delete-text">Are you sure you want to delete team <span class="deleteTeamName">-</span>?</p>
+                    <p class="delete-hint">This action cannot be undone. All team data will be permanently removed.</p>
+                </div>
+                <div class="popup-buttons">
+                    <button class="popup-btn delete-confirm-btn" onclick="confirmTeamDelete()">Yes, Delete</button>
+                    <button class="popup-btn delete-cancel-btn" onclick="closeTeamPopup()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup-overlay" id="participantDetailsPopup">
+        <div class="popup-container details-popup">
+            <div class="popup-header">
+                <h2>Member Details</h2>
+                <button class="close-popup" onclick="closeParticipantPopup()">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 17 L8.125 11.875 M8.125 11.875 L3.875 11.875 M8.125 11.875 L7.5 15.5 M17 3 L11.875 8.125 M11.875 8.125 L16.125 8.125 M11.875 8.125 L11.875 4.5" stroke="#0F153D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/> 
+                    </svg>
+                </button>
+            </div>
+            <div class="popup-content">
+                <h3>Team Informations</h3>
+                <div class="info-box" id="participantTeamInfoBox"></div>
+                <h3>Member Informations</h3>
+                <div class="info-box" id="participantInfoBox"></div>
+                <div class="document-section">
+                    <div class="document-card cv-card">
+                        <div class="doc-title">Download <span class="cv-name" id="participantCVName">-</span> CV</div>
+                        <button class="doc-btn cv-btn" onclick="downloadParticipantCV()">Download</button>
+                    </div>
+                    <div class="document-card id-card">
+                        <div class="doc-title">Download <span class="id-name" id="participantIDName">-</span> <span class="id-type" id="participantIDType">-</span></div>
+                        <button class="doc-btn id-btn" onclick="downloadParticipantID()">Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup-overlay" id="participantEditPopup">
+        <div class="popup-container edit-popup">
+            <div class="popup-header">
+                <h2>Edit Participant</h2>
+                <button class="close-popup" onclick="closeParticipantPopup()">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 17 L8.125 11.875 M8.125 11.875 L3.875 11.875 M8.125 11.875 L7.5 15.5 M17 3 L11.875 8.125 M11.875 8.125 L16.125 8.125 M11.875 8.125 L11.875 4.5" stroke="#0F153D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/> 
+                    </svg>
+                </button>
+            </div>
+            <div class="popup-content">
+                <div class="input-group">
+                    <label>Team Name</label>
+                    <div class="input-with-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M10 1.5C10.1751 1.32491 10.383 1.186 10.6118 1.09124C10.8405 0.99649 11.0858 0.947754 11.3333 0.947754C11.5809 0.947754 11.8261 0.99649 12.0549 1.09124C12.2837 1.186 12.4916 1.32491 12.6667 1.5C12.8418 1.6751 12.9807 1.88302 13.0755 2.11178C13.1702 2.34054 13.219 2.58578 13.219 2.83334C13.219 3.0809 13.1702 3.32614 13.0755 3.5549C12.9807 3.78367 12.8418 3.99158 12.6667 4.16668L4 12.8333L0.5 14L1.66667 10.5L10 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="text" id="editParticipantTeam" placeholder="Enter team name" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Participants Name</label>
+                    <div class="input-with-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M10 1.5C10.1751 1.32491 10.383 1.186 10.6118 1.09124C10.8405 0.99649 11.0858 0.947754 11.3333 0.947754C11.5809 0.947754 11.8261 0.99649 12.0549 1.09124C12.2837 1.186 12.4916 1.32491 12.6667 1.5C12.8418 1.6751 12.9807 1.88302 13.0755 2.11178C13.1702 2.34054 13.219 2.58578 13.219 2.83334C13.219 3.0809 13.1702 3.32614 13.0755 3.5549C12.9807 3.78367 12.8418 3.99158 12.6667 4.16668L4 12.8333L0.5 14L1.66667 10.5L10 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="text" id="editParticipantName" placeholder="Enter participants name" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>Email</label>
+                    <div class="input-with-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M10 1.5C10.1751 1.32491 10.383 1.186 10.6118 1.09124C10.8405 0.99649 11.0858 0.947754 11.3333 0.947754C11.5809 0.947754 11.8261 0.99649 12.0549 1.09124C12.2837 1.186 12.4916 1.32491 12.6667 1.5C12.8418 1.6751 12.9807 1.88302 13.0755 2.11178C13.1702 2.34054 13.219 2.58578 13.219 2.83334C13.219 3.0809 13.1702 3.32614 13.0755 3.5549C12.9807 3.78367 12.8418 3.99158 12.6667 4.16668L4 12.8333L0.5 14L1.66667 10.5L10 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="email" id="editParticipantEmail" placeholder="Enter email" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <div class="input-with-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M10 1.5C10.1751 1.32491 10.383 1.186 10.6118 1.09124C10.8405 0.99649 11.0858 0.947754 11.3333 0.947754C11.5809 0.947754 11.8261 0.99649 12.0549 1.09124C12.2837 1.186 12.4916 1.32491 12.6667 1.5C12.8418 1.6751 12.9807 1.88302 13.0755 2.11178C13.1702 2.34054 13.219 2.58578 13.219 2.83334C13.219 3.0809 13.1702 3.32614 13.0755 3.5549C12.9807 3.78367 12.8418 3.99158 12.6667 4.16668L4 12.8333L0.5 14L1.66667 10.5L10 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="tel" id="editParticipantPhone" placeholder="Enter phone number" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>Line ID</label>
+                    <div class="input-with-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M10 1.5C10.1751 1.32491 10.383 1.186 10.6118 1.09124C10.8405 0.99649 11.0858 0.947754 11.3333 0.947754C11.5809 0.947754 11.8261 0.99649 12.0549 1.09124C12.2837 1.186 12.4916 1.32491 12.6667 1.5C12.8418 1.6751 12.9807 1.88302 13.0755 2.11178C13.1702 2.34054 13.219 2.58578 13.219 2.83334C13.219 3.0809 13.1702 3.32614 13.0755 3.5549C12.9807 3.78367 12.8418 3.99158 12.6667 4.16668L4 12.8333L0.5 14L1.66667 10.5L10 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="text" id="editParticipantLineId" placeholder="Enter Line ID" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>GitHub</label>
+                    <div class="input-with-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M10 1.5C10.1751 1.32491 10.383 1.186 10.6118 1.09124C10.8405 0.99649 11.0858 0.947754 11.3333 0.947754C11.5809 0.947754 11.8261 0.99649 12.0549 1.09124C12.2837 1.186 12.4916 1.32491 12.6667 1.5C12.8418 1.6751 12.9807 1.88302 13.0755 2.11178C13.1702 2.34054 13.219 2.58578 13.219 2.83334C13.219 3.0809 13.1702 3.32614 13.0755 3.5549C12.9807 3.78367 12.8418 3.99158 12.6667 4.16668L4 12.8333L0.5 14L1.66667 10.5L10 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="text" id="editParticipantGitHub" placeholder="Enter GitHub username" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>Birthplace/Date</label>
+                    <div class="input-with-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M10 1.5C10.1751 1.32491 10.383 1.186 10.6118 1.09124C10.8405 0.99649 11.0858 0.947754 11.3333 0.947754C11.5809 0.947754 11.8261 0.99649 12.0549 1.09124C12.2837 1.186 12.4916 1.32491 12.6667 1.5C12.8418 1.6751 12.9807 1.88302 13.0755 2.11178C13.1702 2.34054 13.219 2.58578 13.219 2.83334C13.219 3.0809 13.1702 3.32614 13.0755 3.5549C12.9807 3.78367 12.8418 3.99158 12.6667 4.16668L4 12.8333L0.5 14L1.66667 10.5L10 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="text" id="editParticipantBirth" placeholder="Enter birthplace/date" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Status In Team</label>
+                    <div class="input-with-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M10 1.5C10.1751 1.32491 10.383 1.186 10.6118 1.09124C10.8405 0.99649 11.0858 0.947754 11.3333 0.947754C11.5809 0.947754 11.8261 0.99649 12.0549 1.09124C12.2837 1.186 12.4916 1.32491 12.6667 1.5C12.8418 1.6751 12.9807 1.88302 13.0755 2.11178C13.1702 2.34054 13.219 2.58578 13.219 2.83334C13.219 3.0809 13.1702 3.32614 13.0755 3.5549C12.9807 3.78367 12.8418 3.99158 12.6667 4.16668L4 12.8333L0.5 14L1.66667 10.5L10 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="text" id="editParticipantRole" placeholder="Enter status in team (LEADER/MEMBER)" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>Status</label>
+                    <div class="status-radio">
+                        <div class="radio-label">
+                            <input type="radio" name="participantStatus" value="BINUSIAN" id="editParticipantStatusBinusian">
+                            <span>Binusian</span>
+                        </div>
+                        <div class="radio-label">
+                            <input type="radio" name="participantStatus" value="Non-BINUSIAN" id="editParticipantStatusNonBinusian">
+                            <span>Non-binusian</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="popup-buttons">
+                    <button class="popup-btn save-btn" onclick="saveParticipantEdit()">Save changes</button>
+                    <button class="popup-btn cancel-btn" onclick="closeParticipantPopup()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup-overlay" id="participantDeletePopup">
+        <div class="popup-container delete-popup">
+            <div class="popup-header">
+                <h2>Delete Participant</h2>
+                <button class="close-popup" onclick="closeParticipantPopup()">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 17 L8.125 11.875 M8.125 11.875 L3.875 11.875 M8.125 11.875 L7.5 15.5 M17 3 L11.875 8.125 M11.875 8.125 L16.125 8.125 M11.875 8.125 L11.875 4.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/> 
+                    </svg>
+                </button>
+            </div>
+            <div class="popup-content">
+                <div class="delete-confirm-box">
+                    <p class="delete-text">Are you sure you want to delete participant <span class="deleteParticipantName">-</span>?</p>
+                    <p class="delete-hint">This action cannot be undone. All participant data will be permanently removed.</p>
+                </div>
+                <div class="popup-buttons">
+                    <button class="popup-btn delete-confirm-btn" onclick="confirmParticipantDelete()">Yes, Delete</button>
+                    <button class="popup-btn delete-cancel-btn" onclick="closeParticipantPopup()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
