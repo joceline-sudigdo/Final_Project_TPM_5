@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <script src="register.js"></script>
+</head>
+<body class="container">
+    <div class="header">
+        <h3>Hackathon</h3>
+        <span style="display: flex;">
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html">Home</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#prize">Champion Prizes</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#mentor">Mentor & Jury</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#abt">About</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#faq">FAQ</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#timeline">Timeline</a>
+        </span>
+        <button class="btn">Login</button>
+    </div>
+    <div class="body">
+        <h1 class="h1">Add Member
+            <img
+                class="shine_add_member"
+                src="img/shine.png"
+            />
+        </h1>
+        <img
+            src="./img/star2.png"
+            style="margin-bottom: 3vh; margin-top: -2vh;"
+            width="130px"
+        />
+        <form id="leader-info">
+            <div class="main">
+                <h2 style="text-align: center; font-weight: bolder; position: relative;">Member 1
+                    <img
+                        class="shine_member"
+                        src="img/shine.png"
+                    />
+                </h2>
+                <p>Full Name</p>
+                <input placeholder="Enter your full name" class="text" id="full_name"/>
+                <p class="alert" id="fn_alert"></p>
+                <p>Email</p>
+                <input placeholder="Enter your email" class="text" id="email"/>
+                <p class="alert" id="email_alert"></p>
+                <p>Whatsapp Number</p>
+                <input placeholder="Enter your Whatsapp number" class="text" id="wa"/>
+                <p class="alert" id="wa_alert"></p>
+                <p>LINE ID</p>
+                <input placeholder="Enter your LINE ID" class="text" id="line"/>
+                <p class="alert" id="line_alert"></p>
+                <p>Github ID</p>
+                <input placeholder="Enter your Github ID" class="text" id="github"/>
+                <p class="alert" id="gth_alert"></p>
+                <p>Birth Place</p>
+                <input placeholder="Enter your birth place" class="text" id="birth_place"/>
+                <p class="alert" id="bp_alert"></p>
+                <p>Birth Date</p>
+                <input class="text" id="birth_date" type="date"/>
+                <p class="alert" id="bd_alert"></p>
+                <p>Upload CV</p>
+                <div class="input-box">
+                    <p id="filenameCV">Upload your CV</p>
+                    <input id="cv" placeholder="Upload your CV" type="file" hidden accept=".jpg,.jpeg,.png,.pdf"/>
+                    <button type="button" onclick="document.getElementById('cv').click()" class="btn">Upload</button>
+                </div>
+                <p class="alert" id="cv_alert"></p>
+                <p>Upload ID Card</p>
+                <div class="input-box">
+                    <p id="filenameID">Upload your ID card</p>
+                    <input id="id" placeholder="Upload your ID card" type="file" hidden accept=".jpg,.jpeg,.png,.pdf"/>
+                    <button type="button" onclick="document.getElementById('id').click()" class="btn">Upload</button>
+                </div>
+                <p class="alert" id="id_alert"></p>
+                <div style="margin: 2vh; display: flex; justify-content: center;">
+                    <button type="button" onclick="backpage()" class="btn" style="font-size: 2vh; width: 25vh; text-align: center; margin: 2vh;">Back</button>
+                    <button type="submit" class="btn" style="font-size: 2vh; width: 25vh; text-align: center; margin: 2vh;">+ Add Member</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const cvInput = document.getElementById("cv");
+        const idInput = document.getElementById("id");
+
+        cvInput.addEventListener("change", () => {
+            document.getElementById("filenameCV").textContent = cvInput.files[0].name;
+        })
+
+        idInput.addEventListener("change", ()=>{
+            document.getElementById("filenameID").textContent = idInput.files[0].name;
+        })
+
+        function backpage(){
+            window.location.href = "Register.html"
+        }
+
+        const allowedEmailDomains = ["gmail.com", "yahoo.com", "outlook.com"];
+
+        function isValidEmail(email) {
+            const basicRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!basicRegex.test(email)) return false;
+
+            const domain = email.split("@")[1];
+            return allowedEmailDomains.includes(domain);
+        }
+
+        const form = document.getElementById("leader-info");
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const fullName = document.getElementById('full_name');
+            const email = document.getElementById('email');
+            const wa = document.getElementById('wa');
+            const line = document.getElementById('line');
+            const github = document.getElementById('github');
+            const birthPlace = document.getElementById('birth_place');
+            const birthDate = document.getElementById('birth_date');
+            const id = document.getElementById('id');
+            const cv = document.getElementById('cv');
+
+            let valid = true;
+
+            if (fullName.value.trim() === "") {
+                document.getElementById("fn_alert").innerHTML = "Full name cannot be empty";
+                valid = false;
+            } else {
+                document.getElementById("fn_alert").innerHTML = "";
+            }
+
+            if (email.value.trim() === "") {
+                document.getElementById("email_alert").innerHTML = "Email cannot be empty";
+                valid = false;
+            } else if (!isValidEmail(email.value.trim())) {
+                document.getElementById("email_alert").innerHTML = "Invalid email address";
+            } else {
+                document.getElementById("email_alert").innerHTML = "";
+            }
+
+            if (wa.value.trim() === "") {
+                document.getElementById("wa_alert").innerHTML = "Whatsapp number cannot be empty";
+                valid = false;
+            } else {
+                document.getElementById("wa_alert").innerHTML = "";
+            }
+
+            if (line.value.trim() === "") {
+                document.getElementById("line_alert").innerHTML = "LINE ID cannot be empty";
+                valid = false;
+            } else {
+                document.getElementById("line_alert").innerHTML = "";
+            }
+
+            if (github.value.trim() === "") {
+                document.getElementById("gth_alert").innerHTML = "Github ID cannot be empty";
+                valid = false;
+            } else {
+                document.getElementById("gth_alert").innerHTML = "";
+            }
+
+            if (birthPlace.value.trim() === "") {
+                document.getElementById("bp_alert").innerHTML = "Birth place cannot be empty";
+                valid = false;
+            } else {
+                document.getElementById("bp_alert").innerHTML = "";
+            }
+
+            if (cv.value === "") {
+                document.getElementById("cv_alert").innerHTML = "Please upload your CV";
+                valid = false;
+            } else {
+                document.getElementById("cv_alert").innerHTML = "";
+                document.getElementById("filenameCV").innerHTML = cv.value;
+            }
+
+            if (id.value === "") {
+                document.getElementById("id_alert").innerHTML = "Please upload your ID card";
+                valid = false;
+            } else {
+                document.getElementById("id_alert").innerHTML = "";
+                document.getElementById("filenameID").innerHTML = id.value;
+            }
+
+            if (valid === true) {
+                saveMember1Info();
+                window.location.href = "Member2.html"
+            }
+        })
+    </script>
+</body>
+</html>

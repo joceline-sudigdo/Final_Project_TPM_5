@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <script src="register.js"></script>
+</head>
+<body class="container">
+    <div class="header">
+        <h3>Hackathon</h3>
+        <span style="display: flex;">
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html">Home</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#prize">Champion Prizes</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#mentor">Mentor & Jury</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#abt">About</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#faq">FAQ</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#timeline">Timeline</a>
+        </span>
+        <button class="btn">Login</button>
+    </div>
+    <div class="body">
+        <h1 class="h1">Registration
+            <img
+                class="shine_regist"
+                src="img/shine.png"
+            />
+        </h1>
+        <img
+            src="./img/star3.png"
+            style="margin-bottom: 3vh; margin-top: -2vh;"
+            width="130px"
+        />
+        <div class="info">
+            <div class="main">
+                <h2 style="text-align: center; font-weight: bolder; position: relative;">Confirm Registration
+                    <img
+                        class="shine_confirm_regist"
+                        src="img/shine.png"
+                    />
+                </h2>
+                <p style="text-align: center;">Are you sure you want to submit this registration form?</p>
+            <div style="margin-top: 5vh;">
+                <p class="alert">*Please make sure all information is correct before proceding</p>
+                <button type="button" onclick="backpage()" class="btn" style="font-size: 2vh; width: 25vh; text-align: center; margin: 2vh;">Back</button>
+                <button type="button" onclick="confirmReg()" class="btn" style="font-size: 2vh; width: 25vh; text-align: center; margin: 2vh;">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function backpage(){
+            window.location.href = "Register2.html";
+        }
+        async function confirmReg(){
+            const success = await submitRegistration();
+        }
+        function togglehide1(){
+            const pwd = document.getElementById('pass');
+            if (pwd.type === 'password') {
+                pwd.type = 'text';
+            }
+            else {
+                pwd.type = 'password';
+            }
+        }
+        function togglehide2(){
+            const pwd = document.getElementById('conf_pass');
+            if (pwd.type === 'password') {
+                pwd.type = 'text';
+            }
+            else {
+                pwd.type = 'password';
+            }
+        }
+        const pwd = document.getElementById('pass');
+        const conf_pwd = document.getElementById('conf_pass');
+        const name = document.getElementById('team_name');
+
+        const cb1 = document.getElementById('binusian');
+        const cb2 = document.getElementById('non-binusian');
+
+        const alert1 = document.getElementById("name_alert");
+        const alert2 = document.getElementById("pass_alert");
+        const alert3 = document.getElementById("conf_pass_alert");
+        const alert4 = document.getElementById("cb_alert");
+
+        function nextpage(){
+            if(name.value.trim() === ""){
+                alert1.innerHTML = "Team name cannot be empty";
+            }
+            else {
+                alert1.innerHTML = "";
+            }
+            if (pwd.value.length < 8) {
+                alert2.innerHTML = "Password must be at least 8 characters long";
+            }
+            else {
+                alert2.innerHTML = "";
+            }
+            if (conf_pwd.value !== pwd.value) {
+                alert3.innerHTML = "Passwords do not match. Please try again";
+            }
+            else {
+                alert3.innerHTML = "";
+            }
+            if (cb1.checked && cb2.checked) {
+                alert4.innerHTML = "Please select only one option"
+            }
+            else if (cb1.checked || cb2.checked) {
+                alert4.innerHTML = "";
+            }
+            else {
+                alert4.innerHTML = "Please choose one of the options";
+            }
+
+            if (alert1.textContent === "" && alert2.textContent === "" && alert3.textContent === "" && alert4.textContent === "") {
+                window.location.href = "register2.html"
+            }
+        }
+        
+    </script>
+</body>
+</html>

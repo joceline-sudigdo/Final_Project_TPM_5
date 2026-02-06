@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <script src="register.js"></script>
+</head>
+<body class="container">
+    <div class="header">
+        <h3>Hackathon</h3>
+        <span style="display: flex;">
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html">Home</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#prize">Champion Prizes</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#mentor">Mentor & Jury</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#abt">About</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#faq">FAQ</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#timeline">Timeline</a>
+        </span>
+        <button class="btn">Login</button>
+    </div>
+    <div class="body">
+        <h1 class="h1">Registration
+            <img
+                class="shine_regist"
+                src="img/shine.png"
+            />
+        </h1>
+        <img
+            src="./img/star1.png"
+            style="margin-bottom: 3vh; margin-top: -2vh;"
+            width="130px"
+        />
+        <div class="main">
+            <h2 style="text-align: center; font-weight: bolder; position: relative; display: inline-block;">Group Information
+                <img
+                    class="shine_group_info"
+                    src="img/shine.png"
+                />
+            </h2>
+            <form id="leader-form">
+                <p>Team Name</p>
+                <input placeholder="Enter your team name" class="text" id="team_name"/>
+                <p class="alert" id="name_alert"></p>
+                <p>Password</p>
+                <div class="input-box">
+                    <input type="password" id="pass" placeholder="Enter your password"/>
+                    <button onclick="togglehide1()" id="toggle_pass" style="background-color: whitesmoke; border: gray;" type="button">
+                        <img
+                            src="./img/mingcute_eye-line.png"
+                            style="background-color: whitesmoke; border: none;"
+                        />
+                    </button>
+                </div>
+                <p class="alert" id="pass_alert"></p>
+                <p>Confirmation</p>
+                <div class="input-box">
+                    <input type="password" id="conf_pass" placeholder="Enter your confirmation password"/>
+                    <button onclick="togglehide2()" id="toggle_conf_pass" style="background-color: whitesmoke; border: gray;" type="button">
+                        <img
+                            src="./img/mingcute_eye-line.png"
+                            style="background-color: whitesmoke; border: none;"
+                        />
+                    </button>
+                </div>
+                <p class="alert" id="conf_pass_alert"></p>
+                <span>
+                    <label class="circle-checkbox">
+                        <input type="checkbox" id="binusian">
+                        <span class="checkmark"></span>
+                    </label><p>Binusian</p>
+                    <label class="circle-checkbox" style="margin-left: 0.5em;">
+                        <input type="checkbox" id="non-binusian">
+                        <span class="checkmark"></span>
+                    </label><p>Non-binusian</p>
+                </span>
+                <p class="alert" id="cb_alert"></p>
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <button type="submit" class="btn" style="font-size: 2vh; width: 25vh; text-align: center; margin: 2vh;">Next</button>
+                    <span style="display: flex; align-items: center;"><p style="margin-right: 1vh;">Already have an account?</p><a>Log in here</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function togglehide1(){
+            const pwd = document.getElementById('pass');
+            if (pwd.type === 'password') {
+                pwd.type = 'text';
+            }
+            else {
+                pwd.type = 'password';
+            }
+        }
+        function togglehide2(){
+            const pwd = document.getElementById('conf_pass');
+            if (pwd.type === 'password') {
+                pwd.type = 'text';
+            }
+            else {
+                pwd.type = 'password';
+            }
+        }
+
+        const form = document.getElementById('leader-form');
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const pwd = document.getElementById('pass');
+            const conf_pwd = document.getElementById('conf_pass');
+            const name = document.getElementById('team_name');
+
+            const cb1 = document.getElementById('binusian');
+            const cb2 = document.getElementById('non-binusian');
+
+            let valid = true;
+            if(name.value.trim() === ""){
+                document.getElementById("name_alert").innerHTML = "Group name cannot be empty";
+                valid = false;
+            }
+            else {
+                document.getElementById("name_alert").innerHTML = "";
+            }
+            if (pwd.value.length < 8) {
+                document.getElementById("pass_alert").innerHTML = "Password must be at least 8 characters long";
+                valid = false;
+            }
+            else {
+                document.getElementById("pass_alert").innerHTML = "";
+            }
+            if (conf_pwd.value !== pwd.value) {
+                document.getElementById("conf_pass_alert").innerHTML = "Passwords do not match. Please try again";
+                valid = false;
+            }
+            else {
+                document.getElementById("conf_pass_alert").innerHTML = "";
+            }
+            if (cb1.checked && cb2.checked) {
+                document.getElementById("cb_alert").innerHTML = "Please select only one option"
+                valid = false;
+            }
+            else if (cb1.checked || cb2.checked) {
+                document.getElementById("cb_alert").innerHTML = "";
+            }
+            else {
+                document.getElementById("cb_alert").innerHTML = "Please choose one of the options";
+                valid = false;
+            }
+
+            if (valid === true && cb1.checked) {
+                saveTeamInfo();
+                window.location.href="regist_leader.html";
+            }
+            else if (valid === true && cb2.checked) {
+                saveTeamInfo();
+                window.location.href="regist_leader.html"
+            }
+        });
+    </script>
+</body>
+</html>

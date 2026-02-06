@@ -1,0 +1,216 @@
+@font-face {
+    font-family: "Exo2";
+    src: url(fonts/Exo2-VariableFont_wght.ttf) format(truetype);
+}
+@font-face {
+    font-family: "Poppins";
+    src: url(fonts/Poppins-Regular.ttf) format(truetype);
+}
+@keyframes shine {
+    50% {transform: scale(0.1);}
+}
+body{
+    margin: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0F153D, #000000, #3171D3);
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 9vh;
+    color: white;
+    margin-top: 4vh;
+    margin-bottom: 3vh;
+    font-family: 'Exo2', sans-serif;
+}
+.header span{
+    border-color: whitesmoke;
+    border-style: solid;
+    border-radius: 2.5vh;
+    border-width: 0.3vh;
+}
+.header a{
+    margin: 3vh;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    text-decoration: none;
+    color: whitesmoke;
+}
+.header a:hover{
+    text-decoration: underline;
+}
+.btn{
+    background: linear-gradient(180deg, #14226F, #1B30A7);
+    border: solid;
+    border-color: whitesmoke;
+    padding: 1.5vh;
+    border-width: 0.4vh;
+    padding-left: 4vh;
+    padding-right: 4vh;
+    border-radius: 1vh;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: clamp(0.5em, 1.5vh, 2em);
+    transition-property: transform;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+}
+.header button{
+    box-shadow:
+    0 0 10px rgba(255,255,255,0.4),
+    0 0 30px rgba(255,255,255,0.2);
+}
+.btn:hover{
+    transform: translateY(-10px);
+}
+.body{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 3vh;
+}
+.h1{
+    color: whitesmoke;
+    font-family: 'Exo2', sans-serif;
+    position: relative;
+}
+.shine_regist{
+    position: absolute;
+    left: -5%;
+    filter: drop-shadow(0px 0px 10px white);
+    animation: shine 4s linear infinite;
+}
+.shine_group_info{
+    filter: drop-shadow(0px 0px 10px white);
+    animation: shine 4s linear infinite;
+    position: absolute;
+    top: -0.05em;
+    left: 4.4em;
+}
+.shine_leader_info{
+    position: absolute;
+    left: 22.5%;
+    filter: drop-shadow(0px 0px 10px white);
+    animation: shine 4s linear infinite;
+}
+.shine_add_member{
+    filter: drop-shadow(0px 0px 10px white);
+    animation: shine 4s linear infinite;
+    position: absolute;
+    left: -2%;
+}
+.shine_member{
+    filter: drop-shadow(0px 0px 10px white);
+    animation: shine 4s linear infinite;
+    position: absolute;
+    left: 35%;
+}
+.shine_confirm_regist{
+    filter: drop-shadow(0px 0px 10px white);
+    animation: shine 4s linear infinite;
+    position: absolute;
+    left: 10%;
+}
+.shine_success{
+    filter: drop-shadow(0px 0px 10px white);
+    animation: shine 4s linear infinite;
+    position: absolute;
+    left: -3%;
+}
+.main{
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-color: #0F153D;
+    border-color: whitesmoke;
+    border-style: solid;
+    border-radius: 2vh;
+    color: whitesmoke;
+    padding-left: 10vh;
+    padding-right: 10vh;
+    padding-bottom: 1vh;
+    margin-bottom: 8vh;
+}
+.main p{
+    font-size: 2vh;
+}
+.main input{
+    font-family: 'Poppins', sans-serif;
+}
+.text{
+    padding: 1.7vh;
+    border-color: grey;
+    border-radius: 1vh;
+    width: 80vh;
+}
+.main span{
+    display: flex;
+}
+.main span a{
+    font-size: 2vh;
+    text-decoration: underline;
+}
+.circle-checkbox {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+.circle-checkbox input {
+    display: none;
+    margin: 1em;
+}
+.checkmark {
+    width: 22px;
+    height: 22px;
+    border: 3px solid whitesmoke;
+    border-radius: 50%;
+    background: transparent;
+    position: relative;
+    box-sizing: border-box;
+    margin-right: 0.7vh;
+}
+.circle-checkbox input:checked + .checkmark::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.input-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4vh;
+    background-color: whitesmoke;
+    border-color: grey;
+    border-style: solid;
+    border-radius: 0.8vh;
+    border-width: 0.2vh;
+    width: 82.5vh;
+}
+.input-box input{
+    border: none; 
+    margin: 0.3vh; 
+    width: 80vh;
+    outline: none; 
+    background-color: whitesmoke;
+}
+.input-box p{
+    color: gray;
+    font-size: 1.5vh;
+    margin-left: 1.1vh;
+}
+.alert{
+    color: red;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+</head>
+<body class="container">
+    <div class="header">
+        <h3>Hackathon</h3>
+        <span style="display: flex;">
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html">Home</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#prize">Champion Prizes</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#mentor">Mentor & Jury</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#abt">About</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#faq">FAQ</a><hr>
+            <a href="/FinPro_incomplete/TPM_LandingPage/indx.html#timeline">Timeline</a>
+        </span>
+        <button class="btn">Login</button>
+    </div>
+    <div class="body">
+        <h1 class="h1">Registration
+            <img
+                class="shine_regist"
+                src="img/shine.png"
+            />
+        </h1>
+        <img
+            src="./img/star3.png"
+            style="margin-bottom: 3vh; margin-top: -2vh;"
+            width="130px"
+        />
+        <div class="info">
+            <div class="main" style="display: flex; flex-direction: column; align-items: center;">
+                <h2 style="text-align: center; font-weight: bolder; position: relative;">Registration Successful!
+                    <img
+                        class="shine_success"
+                        src="img/shine.png"
+                    />
+                </h2>
+                <p style="text-align: center;">Your registration was successful. Stay tuned for updates via email and your dashboard.</p>
+                <button type="button" onclick="finish_reg()" class="btn" style="font-size: 2vh; width: 25vh; text-align: center; margin: 2vh; margin-top: 5vh;">Ok</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function finish_reg(){
+            // Clear localStorage after success
+            localStorage.removeItem('hackathon_teamInfo');
+            localStorage.removeItem('hackathon_leader');
+            localStorage.removeItem('hackathon_member1');
+            localStorage.removeItem('hackathon_member2');
+            localStorage.removeItem('hackathon_member3');
+            
+            window.location.href = "indx.html"
+        }
+    </script>
+</body>
+</html>
