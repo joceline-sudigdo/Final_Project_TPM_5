@@ -51,7 +51,8 @@ form.addEventListener("submit", async function (e) {
 
       if (response.ok) {
         // Login successful
-        localStorage.setItem('token', data.token); // Store token
+        localStorage.setItem('teamToken', data.token); //Store token
+        localStorage.setItem('team_name', teamInput.value.trim());
         alert("Login Successful! Redirecting...");
         window.location.href = "../../TeamDashboard/index.html"; // URL encoded for spaces
       } else {
