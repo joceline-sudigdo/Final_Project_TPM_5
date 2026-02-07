@@ -92,6 +92,8 @@ async function fetchData() {
         return true;
     } catch (error) {
         console.error('Error fetching data:', error);
+        localStorage.removeItem('adminToken');
+        window.location.href = 'login.html'
         if (error.message.includes('401') || error.message.includes('403')) {
             localStorage.removeItem('adminToken');
             window.location.href = 'login.html';
