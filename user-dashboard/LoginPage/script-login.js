@@ -53,7 +53,7 @@ form.addEventListener("submit", async function (e) {
         // Login successful
         localStorage.setItem('token', data.token); // Store token
         alert("Login Successful! Redirecting...");
-        window.location.href = "../../User%20Dashboard/index.html"; // URL encoded for spaces
+        window.location.href = "../../TeamDashboard/index.html"; // URL encoded for spaces
       } else {
         // Login failed
         generalError.innerText = data.error || "Login failed";
